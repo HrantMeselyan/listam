@@ -22,9 +22,10 @@
 <span th:each="comment:${comments}">
     <div th:if="${comment.item.id == item.id}">
         <p th:text="${comment.comment}"></p>
-        <a th:href="@{/removeComment(id = ${comment.id})}">
-            remove
-        </a>
+  <a th:href="@{/removeComment(id=${comment.id},itemId=${item.id})}">
+    remove
+</a>
+
         </div>
         </span>
 </div>

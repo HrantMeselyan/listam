@@ -34,15 +34,13 @@ public class CommentController {
         } else {
             return "/items";
         }
-        return "redirect:/items";
+        return "redirect:/items" + id;
     }
-
 
     @GetMapping("/removeComment")
-    public String removeComment(@RequestParam("id") int id) {
+    public String removeComment(@RequestParam("id") int id,@RequestParam("itemId") int itemId) {
         commentRepository.deleteById(id);
-        return "redirect:/items{id}";
+        return "redirect:/items/" + itemId;
     }
-
 
 }
