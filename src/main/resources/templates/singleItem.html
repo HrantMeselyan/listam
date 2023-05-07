@@ -18,14 +18,15 @@
     <input type="submit" value="add">
 </form>
 <br>
-
-<span th:each="comment:${comments}"  >
+<div th:if="${comments != null}">
+<span th:each="comment:${comments}">
     <div th:if="${comment.item.id == item.id}">
         <p th:text="${comment.comment}"></p>
-       <a th:href="@{/comment/remove(id = ${item.id})}">
+        <a th:href="@{/removeComment(id = ${comment.id})}">
             remove
         </a>
-    </span>
+        </div>
+        </span>
 </div>
 </body>
 </html>

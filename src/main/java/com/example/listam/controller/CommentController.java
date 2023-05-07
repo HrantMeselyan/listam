@@ -30,24 +30,19 @@ public class CommentController {
         if (byId.isPresent()) {
             Item item = byId.get();
             commentObj.setItem(item);
+            commentRepository.save(commentObj);
         } else {
-            return "redirect:/items";
+            return "/items";
         }
-        commentRepository.save(commentObj);
         return "redirect:/items";
     }
 
-    @PostMapping("/comment")
-    public String addComment(ModelMap map) {
-        List<Comment> comments = commentRepository.findAll();
-        map.addAttribute("comments", comments);
-        return "/singleItem";
-    }
 
-    @GetMapping("/comment/remove")
+    @GetMapping("/removeComment")
     public String removeComment(@RequestParam("id") int id) {
         commentRepository.deleteById(id);
-        return "redirect:/items";
+        return "redirect:/items{id}";
     }
+
 
 }

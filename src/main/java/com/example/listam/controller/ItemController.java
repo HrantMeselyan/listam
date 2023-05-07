@@ -1,8 +1,10 @@
 package com.example.listam.controller;
 
 import com.example.listam.entity.Category;
+import com.example.listam.entity.Comment;
 import com.example.listam.entity.Item;
 import com.example.listam.repository.CategoryRepository;
+import com.example.listam.repository.CommentRepository;
 import com.example.listam.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ public class ItemController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     @GetMapping("/items")
     public String itemsPage(ModelMap modelMap) {
@@ -49,9 +53,11 @@ public class ItemController {
     @GetMapping("/items/{id}")
     public String singleItemPage(@PathVariable("id") int id, ModelMap modelMap) {
         Optional<Item> byId = itemRepository.findById(id);
+        List<Comment> comments = commentRepository.findAll();
         if (byId.isPresent()) {
             Item item = byId.get();
-            modelMap.addAttribute("item",item);
+            modelMap.addAttribute("comments", comments);
+            modelMap.addAttribute("item", item);
             return "/singleItem";
         } else {
             return "redirect:/items";
