@@ -1,6 +1,5 @@
 package com.example.listam.controller;
 
-import com.example.listam.entity.Category;
 import com.example.listam.entity.Comment;
 import com.example.listam.entity.Item;
 import com.example.listam.repository.CommentRepository;
@@ -35,11 +34,11 @@ public class CommentController {
             return "redirect:/items";
         }
         commentRepository.save(commentObj);
-        return "redirect:/items/${id}";
+        return "redirect:/items";
     }
 
-    @GetMapping("/comments")
-    public String categoriesPage(ModelMap map) {
+    @PostMapping("/comment")
+    public String addComment(ModelMap map) {
         List<Comment> comments = commentRepository.findAll();
         map.addAttribute("comments", comments);
         return "/singleItem";
