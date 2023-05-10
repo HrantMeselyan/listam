@@ -17,6 +17,9 @@ public class Item {
 
     private String description;
 
+
+    private String imgName;
+
     @ManyToOne
     private Category category;
 }

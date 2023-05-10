@@ -7,29 +7,31 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+@RequestMapping("/categories")
 @Controller
 public class CategoryController {
 
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @GetMapping("/categories")
+    @GetMapping
     public String categoriesPage(ModelMap map) {
         List<Category> all = categoryRepository.findAll();
         map.addAttribute("categories", all);
         return "/categories";
     }
 
-    @GetMapping("/categories/add")
+    @GetMapping("/add")
     public String addCategoryPage() {
         return "/addCategory";
     }
 
-    @PostMapping("/categories/add")
+    @PostMapping("/add")
     public String addCategory(@RequestParam("name") String name) {
         Category category = new Category();
         category.setName(name);
@@ -37,7 +39,7 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    @GetMapping("/categories/remove")
+    @GetMapping("/remove")
     public String removeCategory(@RequestParam("id") int id) {
         categoryRepository.deleteById(id);
         return "redirect:/categories";

@@ -6,14 +6,15 @@
 </head>
 <body>
 <h1>add</h1>
-<form action="/items/add" method="post">
+<form action="/items/add" method="post" enctype="multipart/form-data">
     <input type="text" name="title">
     <textarea name="description"></textarea>
     <select name="category.id">
         <option th:each="category:${categories}"
-        th:text="${category.name}" th:value="${category.id}"
+                th:text="${category.name}" th:value="${category.id}"
         ></option>
     </select>
+    <input type="file" name="image">
     <input type="submit" value="add">
 </form>
 </body>

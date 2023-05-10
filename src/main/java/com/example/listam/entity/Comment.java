@@ -11,7 +11,9 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String comment;
+    @Column(name = "comment")
+    private String commentText;
+
     @ManyToOne
     private Item item;
 }

@@ -7,26 +7,24 @@
 <body>
 <a href="/items">back</a>
 <h2 th:text="${item.getTitle()}"></h2>
+<img th:if="${item.getImgName() != null}" th:src="@{/getImage(imageName=${item.getImgName()})}" width="400px">
 <p th:text="${item.description}"></p>
 <span th:if="${item.category != null}" th:text="${item.category.name}"></span>
 <br>
 
 <h2>Comment</h2>
 <form action="/addComment" method="post">
-    <input type="hidden" name="id" th:value="${item.id}">
-    <textarea name="comment"></textarea>
+    <input type="hidden" name="item.id" th:value="${item.id}">
+    <textarea name="commentText"></textarea>
     <input type="submit" value="add">
 </form>
 <br>
 <div th:if="${comments != null}">
 <span th:each="comment:${comments}">
-    <div th:if="${comment.item.id == item.id}">
-        <p th:text="${comment.comment}"></p>
+        <p th:text="${comment.commentText}"></p>
   <a th:href="@{/removeComment(id=${comment.id},itemId=${item.id})}">
     remove
 </a>
-
-        </div>
         </span>
 </div>
 </body>
